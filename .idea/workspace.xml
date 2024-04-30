@@ -4,30 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7ad42ff9-2ccb-4a34-b9b0-d567e5608aee" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/realestate/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/config/MyConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/config/MyConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/controller/BrokerProfileController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/controller/PropertyController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/controller/ServiceController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/exception/BrokerProfileNotFoundException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/exception/CustomExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/exception/CustomExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/exception/PropertyNotFoundException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/exception/ServiceNotFoundException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/repository/BrokerProfileRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/repository/PropertyRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/repository/ServiceRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/service/BrokerProfileService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/service/PropertyService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/service/ServiceService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/serviceImpl/BrokerProfileServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/serviceImpl/PropertyServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/serviceImpl/ServiceServiceImpl.java" beforeDir="false" />
-    </list>
+    <list default="true" id="7ad42ff9-2ccb-4a34-b9b0-d567e5608aee" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
