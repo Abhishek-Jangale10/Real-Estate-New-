@@ -1,6 +1,8 @@
 package com.realestate.dto;
 
 import com.realestate.entity.BrokerProfile;
+import com.realestate.entity.User;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +18,10 @@ public class BrokerProfileDto {
     private String docNumber;
     private String fullAddress;
     private String city;
+
+
+    @OneToOne(mappedBy = "brokerProfile")
+    private User user;
 
     public BrokerProfileDto(BrokerProfile brokerProfile){
         this.brokerProfileId = brokerProfile.getBrokerProfileId();
