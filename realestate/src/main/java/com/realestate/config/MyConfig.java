@@ -27,7 +27,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @EnableMethodSecurity(prePostEnabled = true)
 public class MyConfig {
-    public static final String[] PUBLIC_URLS = {"/user/add", "/login","/property/**" , "/users/**"};
+    public static final String[] PUBLIC_URLS = {"/user/add", "/login","/property/**" , "/users/**,/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/swagger-ui.html",
+            "/swagger-resources/**"};
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 

@@ -5,24 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7ad42ff9-2ccb-4a34-b9b0-d567e5608aee" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/controller/BrokerProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/controller/BrokerProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/controller/ForgetPasswordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/controller/ForgetPasswordController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/dto/InquiryDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/dto/InquiryDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/dto/ServiceBookingDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/dto/ServiceBookingDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/dto/ServiceDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/dto/ServiceDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/entity/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/entity/Service1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/entity/ServiceBooking.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/entity/ServiceBooking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/exception/BrokerProfileNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/exception/BrokerProfileNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/repository/BrokerProfileRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/repository/BrokerProfileRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/repository/UserRepo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/security/CustomUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/security/CustomUserDetailsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/service/BrokerProfileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/service/BrokerProfileService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/serviceImpl/BrokerProfileServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/serviceImpl/BrokerProfileServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/serviceImpl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/serviceImpl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/realestate/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/realestate/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/realestate/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/realestate/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/RealestateApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/RealestateApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/config/MyConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/realestate/src/main/java/com/realestate/config/MyConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
