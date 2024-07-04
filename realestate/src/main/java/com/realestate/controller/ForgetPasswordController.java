@@ -6,7 +6,7 @@ import com.realestate.exception.InvalidOtpException;
 import com.realestate.exception.OtpExpiredException;
 import com.realestate.payloads.JwtAuthResponse;
 import com.realestate.repository.EmailVerificationRepository;
-import com.realestate.repository.UserRepo;
+import com.realestate.repository.UserRepository;
 import com.realestate.security.JwtTokenHelper;
 import com.realestate.service.EmailService;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -24,14 +24,15 @@ import java.util.Random;
 @RestController
 @RequestMapping("/users")
 public class ForgetPasswordController {
+
     @Autowired
     private JwtTokenHelper jwtTokenHelper;
 
 
     @Autowired
-    private UserRepo usersRepository;
+    private UserRepository usersRepository;
 
-    @Autowired
+    @Autowired 
     private BCryptPasswordEncoder encoder;
 
     @Autowired

@@ -15,7 +15,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Service {
+public class Service1 {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer serviceId;
@@ -27,7 +27,7 @@ public class Service {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
-    public Service(ServiceDto serviceDto){
+    public Service1(ServiceDto serviceDto){
         this.serviceId = serviceDto.getServiceId();
         this.description = serviceDto.getDescription();
         this.name = serviceDto.getName();

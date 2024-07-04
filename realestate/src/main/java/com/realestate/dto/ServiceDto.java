@@ -1,6 +1,6 @@
 package com.realestate.dto;
 
-import com.realestate.entity.Service;
+import com.realestate.entity.Service1;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +15,7 @@ public class ServiceDto {
     private String description;
     private String name;
 
-    public ServiceDto(Service service){
+    public ServiceDto(Service1 service){
         this.serviceId = service.getServiceId();
         this.description = service.getDescription();
         this.name = service.getName();

@@ -1,9 +1,10 @@
 package com.realestate.repository;
 
-import com.realestate.entity.BrokerProfile;
+import com.realestate.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BrokerProfileRepository extends JpaRepository<BrokerProfile, Integer> {
+public interface UserRepository extends JpaRepository<User,Integer> {
+    User findByEmail(String email);
 }

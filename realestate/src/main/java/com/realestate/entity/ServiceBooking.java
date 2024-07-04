@@ -19,8 +19,11 @@ public class ServiceBooking {
     private  String status;
     private  String col;
     private String serviceBookingCol;
+
+
     @ManyToOne(fetch = FetchType.EAGER)
-    private Service service;
+    private Service1 service;
+
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
     public ServiceBooking(ServiceBookingDto serviceBookingDto){

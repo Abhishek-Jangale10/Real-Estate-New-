@@ -6,19 +6,18 @@ import com.realestate.entity.User;
 import com.realestate.entity.UserRole;
 import com.realestate.exception.UserAlreadyExistException;
 import com.realestate.repository.RolesRepo;
-import com.realestate.repository.UserRepo;
+import com.realestate.repository.UserRepository;
 import com.realestate.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
-    private UserRepo userRepo;
+    private UserRepository userRepo;
     @Autowired
     private RolesRepo rolesRepo;
 

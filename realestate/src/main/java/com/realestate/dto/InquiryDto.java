@@ -16,6 +16,8 @@ public class InquiryDto {
     private String message;
     private String status;
 
+    private Integer propertyId;
+
     public InquiryDto(Inquiry inquiry){
         this.inquiryId = inquiry.getInquiryId();
         this.message = inquiry.getMessage();

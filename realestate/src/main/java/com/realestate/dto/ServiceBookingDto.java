@@ -12,14 +12,19 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ServiceBookingDto {
     private Integer serviceBookingId;
-    private  String status;
-    private  String col;
+    private String status;
+    private String col;
     private String serviceBookingCol;
 
-    public ServiceBookingDto(ServiceBooking serviceBooking){
+    private Integer serviceId;
+    private Integer userId;
+
+    public ServiceBookingDto(ServiceBooking serviceBooking) {
         this.serviceBookingId = serviceBooking.getServiceBookingId();
         this.status = serviceBooking.getStatus();
         this.col = serviceBooking.getCol();
         this.serviceBookingCol = serviceBooking.getServiceBookingCol();
+        this.serviceId = serviceBooking.getService().getServiceId();
+        this.userId = serviceBooking.getUser().getUserId();
     }
 }

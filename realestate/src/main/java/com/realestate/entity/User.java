@@ -36,7 +36,7 @@ public class User implements UserDetails {
     @JsonIgnore
     private Set<UserRole> userRoles = new HashSet<>();
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
-    private Set<Service> services  = new HashSet<>();
+    private Set<Service1> services  = new HashSet<>();
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private Set<ServiceBooking> serviceBookings  = new HashSet<>();
     @OneToOne

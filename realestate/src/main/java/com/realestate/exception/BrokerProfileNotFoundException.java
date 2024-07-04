@@ -1,7 +1,7 @@
 package com.realestate.exception;
 
-public class BrokerProfileNotFoundException extends Exception {
-    public BrokerProfileNotFoundException(String s) {
-        super(s);
+public class BrokerProfileNotFoundException extends RuntimeException {
+    public BrokerProfileNotFoundException(String message) {
+        super(message);
     }
 }

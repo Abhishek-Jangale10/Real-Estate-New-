@@ -3,7 +3,7 @@ package com.realestate.security;
 import com.realestate.entity.User;
 import com.realestate.exception.ResourceNotFoundException;
 import com.realestate.exception.UserDisabledException;
-import com.realestate.repository.UserRepo;
+import com.realestate.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
-    private UserRepo usersRepository;
+    private UserRepository usersRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

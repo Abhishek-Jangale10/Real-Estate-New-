@@ -6,9 +6,10 @@ import com.realestate.exception.BrokerProfileNotFoundException;
 import com.realestate.repository.BrokerProfileRepository;
 import com.realestate.service.BrokerProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -18,41 +19,34 @@ public class BrokerProfileServiceImpl implements BrokerProfileService {
     @Autowired
     private BrokerProfileRepository brokerProfileRepository;
 
+    @Override
     public void addBrokerProfile(BrokerProfileDto brokerProfileDto) {
-        try {
-            BrokerProfile brokerProfile = new BrokerProfile(brokerProfileDto);
-            brokerProfileRepository.save(brokerProfile);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        BrokerProfile brokerProfile = new BrokerProfile(brokerProfileDto);
+        brokerProfileRepository.save(brokerProfile);
     }
+
     @Override
     public void updateBrokerProfile(BrokerProfileDto brokerProfileDto, Integer brokerProfileId) {
-        try {
-            Optional<BrokerProfile> optionalBrokerProfile = brokerProfileRepository.findById(brokerProfileId);
+        Optional<BrokerProfile> optionalBrokerProfile = brokerProfileRepository.findById(brokerProfileId);
 
-            if (optionalBrokerProfile.isPresent()) {
-                BrokerProfile brokerProfile = optionalBrokerProfile.get();
-                brokerProfile.setName(brokerProfileDto.getName());
-                brokerProfile.setDocNumber(brokerProfileDto.getDocNumber());
-                brokerProfile.setFullAddress(brokerProfileDto.getFullAddress());
-                brokerProfile.setCity(brokerProfileDto.getCity());
-                // Set other properties as needed
-                brokerProfileRepository.save(brokerProfile);
-            } else {
-                throw new BrokerProfileNotFoundException("Broker profile not found with ID: " + brokerProfileId);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        if (optionalBrokerProfile.isPresent()) {
+            BrokerProfile brokerProfile = optionalBrokerProfile.get();
+            brokerProfile.setName(brokerProfileDto.getName());
+            brokerProfile.setDocNumber(brokerProfileDto.getDocNumber());
+            brokerProfile.setFullAddress(brokerProfileDto.getFullAddress());
+            brokerProfile.setCity(brokerProfileDto.getCity());
+            brokerProfileRepository.save(brokerProfile);
+        } else {
+            throw new BrokerProfileNotFoundException("Broker profile not found with ID: " + brokerProfileId);
         }
     }
+
     @Override
-    public List<BrokerProfileDto> getAllBrokerProfiles() {
-        List<BrokerProfile> brokerProfiles = brokerProfileRepository.findAll();
-        return brokerProfiles.stream()
-                .map(BrokerProfileDto::new)
-                .collect(Collectors.toList());
+    public Page<BrokerProfileDto> getAllBrokerProfiles(Pageable pageable) {
+        Page<BrokerProfile> brokerProfiles = brokerProfileRepository.findAll(pageable);
+        return brokerProfiles.map(BrokerProfileDto::new);
     }
+
     @Override
     public BrokerProfileDto getBrokerProfileById(Integer brokerProfileId) throws BrokerProfileNotFoundException {
         Optional<BrokerProfile> optionalBrokerProfile = brokerProfileRepository.findById(brokerProfileId);
@@ -62,6 +56,7 @@ public class BrokerProfileServiceImpl implements BrokerProfileService {
             throw new BrokerProfileNotFoundException("Broker profile not found with ID: " + brokerProfileId);
         }
     }
+
     @Override
     public void deleteBrokerProfileById(Integer brokerProfileId) throws BrokerProfileNotFoundException {
         Optional<BrokerProfile> optionalBrokerProfile = brokerProfileRepository.findById(brokerProfileId);
