@@ -37,8 +37,8 @@ public class UserServiceImpl implements UserService {
 
             Set<UserRole> roles = new HashSet<>();
             Roles role = new Roles();
-            role.setId(44);
-            role.setName("NORMAL");
+            role.setId(50);
+            role.setName("SERVICEPROVIDER");
 
             UserRole userRole = new UserRole();
             userRole.setUser(user);

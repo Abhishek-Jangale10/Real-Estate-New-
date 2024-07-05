@@ -39,9 +39,10 @@ public class User implements UserDetails {
     private Set<Service1> services  = new HashSet<>();
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private Set<ServiceBooking> serviceBookings  = new HashSet<>();
-    @OneToOne
-    @JoinColumn(name = "brokerProfileId")
-    private BrokerProfile brokerProfile;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<BrokerProfile> brokerProfiles;
+
 
     public User(UserDto userDto){
         this.userId = userDto.getUserId();

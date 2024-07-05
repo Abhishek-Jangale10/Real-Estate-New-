@@ -1,11 +1,12 @@
 package com.realestate.controller;
 
 import com.realestate.dto.PropertyDto;
+import com.realestate.dto.ResponsePropertyDto;
 import com.realestate.exception.PropertyNotFoundException;
+import com.realestate.exception.PageNotFoundException;
 import com.realestate.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,9 +39,16 @@ public class PropertyController {
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<Page<PropertyDto>> showAllProperties(Pageable pageable) {
-        Page<PropertyDto> allProperties = propertyService.getAllProperties(pageable);
-        return new ResponseEntity<>(allProperties, HttpStatus.OK);
+    public ResponseEntity<ResponsePropertyDto> showAllProperties(@RequestParam int pageNo, @RequestParam(defaultValue = "10") int pageSize) {
+        try {
+            Page<PropertyDto> allProperties = propertyService.getAllProperties(pageNo, pageSize);
+            ResponsePropertyDto response = new ResponsePropertyDto("success", allProperties.getContent(), allProperties.getTotalPages());
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (PageNotFoundException e) {
+            ResponsePropertyDto response = new ResponsePropertyDto("unsuccess");
+            response.setException("Page not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
     }
 
     @GetMapping("/getById/{propertyId}")

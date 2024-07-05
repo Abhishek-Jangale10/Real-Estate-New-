@@ -3,10 +3,12 @@ package com.realestate.serviceImpl;
 import com.realestate.dto.PropertyDto;
 import com.realestate.entity.Property;
 import com.realestate.exception.PropertyNotFoundException;
+import com.realestate.exception.PageNotFoundException;
 import com.realestate.repository.PropertyRepository;
 import com.realestate.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -41,8 +43,14 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
-    public Page<PropertyDto> getAllProperties(Pageable pageable) {
+    public Page<PropertyDto> getAllProperties(int pageNo, int pageSize) throws PageNotFoundException {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<Property> properties = propertyRepository.findAll(pageable);
+
+        if (properties.isEmpty()) {
+            throw new PageNotFoundException("Properties not found");
+        }
+
         return properties.map(PropertyDto::new);
     }
 

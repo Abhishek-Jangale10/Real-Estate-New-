@@ -1,7 +1,9 @@
 package com.realestate.controller;
 
+import com.realestate.dto.ResponseServiceDto;
 import com.realestate.dto.ServiceDto;
 import com.realestate.exception.ServiceNotFoundException;
+import com.realestate.exception.PageNotFoundException;
 import com.realestate.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -38,9 +40,16 @@ public class ServiceController {
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<Page<ServiceDto>> showAllServices(Pageable pageable) {
-        Page<ServiceDto> allServices = serviceService.getAllServices(pageable);
-        return new ResponseEntity<>(allServices, HttpStatus.OK);
+    public ResponseEntity<ResponseServiceDto> showAllServices(Pageable pageable) {
+        try {
+            Page<ServiceDto> allServices = serviceService.getAllServices(pageable);
+            ResponseServiceDto response = new ResponseServiceDto("success", allServices.getContent(), allServices.getTotalPages());
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (PageNotFoundException e) {
+            ResponseServiceDto response = new ResponseServiceDto("unsuccess");
+            response.setException("Page not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
     }
 
     @GetMapping("/getById/{serviceId}")

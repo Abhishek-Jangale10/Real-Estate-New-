@@ -2,14 +2,16 @@ package com.realestate.serviceImpl;
 
 import com.realestate.dto.ServiceBookingDto;
 import com.realestate.entity.ServiceBooking;
+import com.realestate.exception.PageNotFoundException;
+import com.realestate.exception.ResourceNotFoundException;
 import com.realestate.exception.ServiceBookingNotFoundException;
 import com.realestate.repository.ServiceBookingRepository;
 import com.realestate.service.ServiceBookingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -40,10 +42,41 @@ public class ServiceBookingServiceImpl implements ServiceBookingService {
     }
 
     @Override
-    public Page<ServiceBookingDto> getAllServiceBookings(Pageable pageable) {
-        Page<ServiceBooking> serviceBookings = serviceBookingRepository.findAll(pageable);
-        return serviceBookings.map(ServiceBookingDto::new);
+    public List<ServiceBookingDto> getAllServiceBookings(int pageNo, int pageSize) throws PageNotFoundException, ResourceNotFoundException {
+        // Retrieve all service bookings from repository
+        List<ServiceBooking> serviceBookings = serviceBookingRepository.findAll();
+
+        // Calculate total number of service bookings
+        int totalServiceBookings = serviceBookings.size();
+        int totalPages = (int) Math.ceil((double) totalServiceBookings / pageSize);
+
+        // Throw exception if no service bookings found
+        if (serviceBookings.isEmpty()) {
+            throw new ResourceNotFoundException("Service bookings not found");
+        }
+
+        // Throw exception if page number is out of range
+        if (pageNo < 0 || pageNo >= totalPages) {
+            throw new PageNotFoundException("Page not found");
+        }
+
+        // Calculate indices for pagination
+        int pageStart = pageNo * pageSize;
+        int pageEnd = Math.min(pageStart + pageSize, totalServiceBookings);
+
+        // Prepare list to hold paginated ServiceBookingDto objects
+        List<ServiceBookingDto> paginatedServiceBookings = new ArrayList<>();
+
+        // Convert ServiceBooking entities to ServiceBookingDto objects
+        for (int i = pageStart; i < pageEnd; i++) {
+            ServiceBooking serviceBooking = serviceBookings.get(i);
+            ServiceBookingDto serviceBookingDto = new ServiceBookingDto(serviceBooking);
+            paginatedServiceBookings.add(serviceBookingDto);
+        }
+
+        return paginatedServiceBookings;
     }
+
 
     @Override
     public ServiceBookingDto getServiceBookingById(Integer serviceBookingId) throws ServiceBookingNotFoundException {

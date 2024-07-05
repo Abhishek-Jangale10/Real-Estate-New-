@@ -1,5 +1,8 @@
 package com.realestate.exception;
 
+import lombok.Data;
+
+@Data
 public class ResourceNotFoundException extends Throwable {
     String resourceName;
     String fieldName;
@@ -17,6 +20,10 @@ public class ResourceNotFoundException extends Throwable {
         this.resourceName = resourceName;
         this.fieldName = fieldName;
         this.fieldValue1 = fieldValue1;
+    }
+
+    public ResourceNotFoundException(String serviceBookingsNotFound) {
+        super(serviceBookingsNotFound);
     }
 
     public String getResourceName() {

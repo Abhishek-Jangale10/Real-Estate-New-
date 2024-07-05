@@ -1,14 +1,17 @@
 package com.realestate.controller;
 
 import com.realestate.dto.BrokerProfileDto;
+import com.realestate.dto.ResponseBrokerProfileDto;
 import com.realestate.exception.BrokerProfileNotFoundException;
+import com.realestate.exception.PageNotFoundException;
 import com.realestate.service.BrokerProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/broker-profiles")
@@ -38,9 +41,17 @@ public class BrokerProfileController {
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<Page<BrokerProfileDto>> showAllBrokerProfiles(Pageable pageable) {
-        Page<BrokerProfileDto> allBrokerProfiles = brokerProfileService.getAllBrokerProfiles(pageable);
-        return new ResponseEntity<>(allBrokerProfiles, HttpStatus.OK);
+    public ResponseEntity<ResponseBrokerProfileDto> showAllBrokerProfiles(@RequestParam int pageNo, @RequestParam(defaultValue = "10") int pageSize) {
+        try {
+            List<BrokerProfileDto> brokerProfiles = brokerProfileService.getAllBrokerProfiles(pageNo, pageSize);
+            int totalPages = brokerProfileService.getTotalPages(pageSize);
+            ResponseBrokerProfileDto response = new ResponseBrokerProfileDto("success", brokerProfiles, totalPages);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (PageNotFoundException e) {
+            ResponseBrokerProfileDto response = new ResponseBrokerProfileDto("unsuccess");
+            response.setException("Page not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
     }
 
     @GetMapping("/getById/{brokerProfileId}")

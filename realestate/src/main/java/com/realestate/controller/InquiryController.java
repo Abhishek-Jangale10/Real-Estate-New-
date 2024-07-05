@@ -1,7 +1,9 @@
 package com.realestate.controller;
 
 import com.realestate.dto.InquiryDto;
+import com.realestate.dto.ResponseInquiryDto;
 import com.realestate.exception.InquiryNotFoundException;
+import com.realestate.exception.PageNotFoundException;
 import com.realestate.service.InquiryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -38,9 +40,16 @@ public class InquiryController {
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<Page<InquiryDto>> showAllInquiries(Pageable pageable) {
-        Page<InquiryDto> allInquiries = inquiryService.getAllInquiries(pageable);
-        return new ResponseEntity<>(allInquiries, HttpStatus.OK);
+    public ResponseEntity<ResponseInquiryDto> showAllInquiries(@RequestParam int pageNo, @RequestParam(defaultValue = "10") int pageSize) {
+        try {
+            Page<InquiryDto> allInquiries = inquiryService.getAllInquiries(pageNo, pageSize);
+            ResponseInquiryDto response = new ResponseInquiryDto("success", allInquiries.getContent(), allInquiries.getTotalPages());
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (PageNotFoundException e) {
+            ResponseInquiryDto response = new ResponseInquiryDto("unsuccess");
+            response.setException("Page not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
     }
 
     @GetMapping("/getById/{inquiryId}")

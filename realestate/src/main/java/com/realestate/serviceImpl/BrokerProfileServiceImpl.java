@@ -2,16 +2,20 @@ package com.realestate.serviceImpl;
 
 import com.realestate.dto.BrokerProfileDto;
 import com.realestate.entity.BrokerProfile;
+import com.realestate.entity.User;
 import com.realestate.exception.BrokerProfileNotFoundException;
+import com.realestate.exception.PageNotFoundException;
 import com.realestate.repository.BrokerProfileRepository;
+import com.realestate.repository.UserRepository;
 import com.realestate.service.BrokerProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class BrokerProfileServiceImpl implements BrokerProfileService {
@@ -19,10 +23,28 @@ public class BrokerProfileServiceImpl implements BrokerProfileService {
     @Autowired
     private BrokerProfileRepository brokerProfileRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Override
     public void addBrokerProfile(BrokerProfileDto brokerProfileDto) {
         BrokerProfile brokerProfile = new BrokerProfile(brokerProfileDto);
-        brokerProfileRepository.save(brokerProfile);
+
+        Optional<User> userOptional = userRepository.findById(brokerProfileDto.getUserId());
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            brokerProfile.setUser(user);
+
+            if (user.getBrokerProfiles() == null) {
+                user.setBrokerProfiles(new HashSet<>());
+            }
+            user.getBrokerProfiles().add(brokerProfile);
+
+            brokerProfileRepository.save(brokerProfile);
+            userRepository.save(user);
+        } else {
+            throw new RuntimeException("User not found with ID: " + brokerProfileDto.getUserId());
+        }
     }
 
     @Override
@@ -42,9 +64,33 @@ public class BrokerProfileServiceImpl implements BrokerProfileService {
     }
 
     @Override
-    public Page<BrokerProfileDto> getAllBrokerProfiles(Pageable pageable) {
-        Page<BrokerProfile> brokerProfiles = brokerProfileRepository.findAll(pageable);
-        return brokerProfiles.map(BrokerProfileDto::new);
+    public List<BrokerProfileDto> getAllBrokerProfiles(int pageNo, int pageSize) throws PageNotFoundException {
+        List<BrokerProfile> brokerProfiles = brokerProfileRepository.findAll();
+        if (brokerProfiles.isEmpty()) {
+            throw new PageNotFoundException("Broker profiles not found");
+        }
+
+        int totalBrokerProfiles = brokerProfiles.size();
+        int totalPages = (int) Math.ceil((double) totalBrokerProfiles / pageSize);
+        if (pageNo < 0 || pageNo >= totalPages) {
+            throw new PageNotFoundException("Page not found");
+        }
+
+        int startIndex = pageNo * pageSize;
+        int endIndex = Math.min(startIndex + pageSize, totalBrokerProfiles);
+        List<BrokerProfileDto> brokerProfileDtos = new ArrayList<>();
+
+        for (int i = startIndex; i < endIndex; i++) {
+            brokerProfileDtos.add(new BrokerProfileDto(brokerProfiles.get(i)));
+        }
+
+        return brokerProfileDtos;
+    }
+
+    @Override
+    public int getTotalPages(int pageSize) {
+        int totalBrokerProfiles = (int) brokerProfileRepository.count();
+        return (int) Math.ceil((double) totalBrokerProfiles / pageSize);
     }
 
     @Override

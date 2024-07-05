@@ -5,6 +5,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/realestate/pom.xml" />
+        <option value="$PROJECT_DIR$/../../Blog Application/blog-app-apis/pom.xml" />
       </list>
     </option>
   </component>

@@ -3,10 +3,12 @@ package com.realestate.serviceImpl;
 import com.realestate.dto.ServiceDto;
 import com.realestate.entity.Service1;
 import com.realestate.exception.ServiceNotFoundException;
+import com.realestate.exception.PageNotFoundException;
 import com.realestate.repository.ServiceRepository;
 import com.realestate.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -39,8 +41,13 @@ public class ServiceServiceImpl implements ServiceService {
     }
 
     @Override
-    public Page<ServiceDto> getAllServices(Pageable pageable) {
+    public Page<ServiceDto> getAllServices(Pageable pageable) throws PageNotFoundException {
         Page<Service1> services = serviceRepository.findAll(pageable);
+
+        if (services.isEmpty()) {
+            throw new PageNotFoundException("Services not found");
+        }
+
         return services.map(ServiceDto::new);
     }
 

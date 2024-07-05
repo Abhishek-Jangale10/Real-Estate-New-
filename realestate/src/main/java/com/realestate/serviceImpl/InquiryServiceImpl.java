@@ -3,15 +3,16 @@ package com.realestate.serviceImpl;
 import com.realestate.dto.InquiryDto;
 import com.realestate.entity.Inquiry;
 import com.realestate.exception.InquiryNotFoundException;
+import com.realestate.exception.PageNotFoundException;
 import com.realestate.repository.InquiryRepository;
 import com.realestate.service.InquiryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class InquiryServiceImpl implements InquiryService {
@@ -40,12 +41,18 @@ public class InquiryServiceImpl implements InquiryService {
     }
 
     @Override
-    public Page<InquiryDto> getAllInquiries(Pageable pageable) {
+    public Page<InquiryDto> getAllInquiries(int pageNo, int pageSize) throws PageNotFoundException {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<Inquiry> inquiries = inquiryRepository.findAll(pageable);
+
+        if (inquiries.isEmpty()) {
+            throw new PageNotFoundException("Inquiries not found");
+        }
+
         return inquiries.map(InquiryDto::new);
     }
 
-    @Override
+    @Override 
     public InquiryDto getInquiryById(Integer inquiryId) throws InquiryNotFoundException {
         Optional<Inquiry> optionalInquiry = inquiryRepository.findById(inquiryId);
         if (optionalInquiry.isPresent()) {

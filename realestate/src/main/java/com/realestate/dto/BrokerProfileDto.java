@@ -18,6 +18,7 @@ public class BrokerProfileDto {
     private String docNumber;
     private String fullAddress;
     private String city;
+    private Integer userId;
 
 
     @OneToOne(mappedBy = "brokerProfile")
@@ -29,5 +30,6 @@ public class BrokerProfileDto {
         this.docNumber = brokerProfile.getDocNumber();
         this.fullAddress = brokerProfile.getFullAddress();
         this.city = brokerProfile.getCity();
+
     }
 }
